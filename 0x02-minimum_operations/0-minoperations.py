@@ -1,40 +1,36 @@
 #!/usr/bin/python3
 '''Minimum Operations'''
+
+
 def minOperations(n):
-    """
-        function for calculating the fewest number of operations
-        needed to give a result of exactly n H characters in a file
-        args: n: Number of characters to be displayed
-        return:
-               number of min operations
-    """
-    p_ch = 1
-    clipb = 0
+    '''minOperations'''
+    pasted_chars = 1
+    clipboard = 0
     counter = 0
 
-    while p_ch < n:
-        if clipb == 0:
-            clipb = p_ch
+    while pasted_chars < n:
+        if clipboard == 0:
+            clipboard = pasted_chars
             counter += 1
 
-        if p_ch == 1:
-            p_ch += clipb
+        if pasted_chars == 1:
+            pasted_chars += clipboard
             counter += 1
             continue
 
-        remaining = n - p_ch
-        if remaining < clipb:
+        remaining = n - pasted_chars
+        if remaining < clipboard:
             return 0
 
-        if remaining % p_ch != 0:
-            p_ch += clipb
+        if remaining % pasted_chars != 0:
+            pasted_chars += clipboard
             counter += 1
         else:
-            clipb = p_ch
-            p_ch += clipb
+            clipboard = pasted_chars
+            pasted_chars += clipboard
             counter += 2
 
-    if p_ch == n:
+    if pasted_chars == n:
         return counter
     else:
         return 0
