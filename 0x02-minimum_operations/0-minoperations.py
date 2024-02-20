@@ -8,17 +8,33 @@ def minOperations(n):
         return:
                number of min operations
     """
-
-    db = 1
-    beg = 0
+    p_ch = 1
+    clipb = 0
     counter = 0
-    while db < n:
-        remainder = n - db
-        if (remainder % db == 0):
-            beg = db
-            db += beg
-            counter += 2
-        else:
-            db += beg
+
+    while p_ch < n:
+        if clipb == 0:
+            clipb = p_ch
             counter += 1
-    return counter
+
+        if p_ch == 1:
+            p_ch += clipb
+            counter += 1
+            continue
+
+        remaining = n - p_ch
+        if remaining < clipb:
+            return 0
+
+        if remaining % p_ch != 0:
+            p_ch += clipb
+            counter += 1
+        else:
+            clipb = p_ch
+            p_ch += clipb
+            counter += 2
+
+    if p_ch == n:
+        return counter
+    else:
+        return 0
